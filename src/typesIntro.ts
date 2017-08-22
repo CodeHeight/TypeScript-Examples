@@ -28,9 +28,9 @@ let error = ErrorCodes.WRONG_INPUT;
 
 let tuple: [string, number] = ['Some String', 5];
 
-let firstItem = tuple[0];
-let secondItem: number = tuple[1];
-
 function getNameAndAge(): [string, number] {
     return ['Josh Yates', 37];
 }
+
+let firstItem = tuple[0];
+let secondItem: number = tuple[1];

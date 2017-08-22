@@ -21,8 +21,8 @@ var ErrorCodes;
 })(ErrorCodes || (ErrorCodes = {}));
 var error = ErrorCodes.WRONG_INPUT;
 var tuple = ['Some String', 5];
-var firstItem = tuple[0];
-var secondItem = tuple[1];
 function getNameAndAge() {
     return ['Josh Yates', 37];
 }
+var firstItem = tuple[0];
+var secondItem = tuple[1];
