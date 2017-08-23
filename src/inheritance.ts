@@ -1,5 +1,5 @@
 interface IAnimal {
-    readonly numberOfLegs;
+    readonly numberOfLegs: number;
     makeSound(): void;
     eatFood(food: string): void;
 }
