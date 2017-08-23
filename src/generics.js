@@ -24,6 +24,11 @@ var Person = (function () {
 function createCache(itemConstructor) {
     return new ItemsCache(itemConstructor);
 }
+//generic types only for compiler not availabe 
+//at runtime. This will not work:
+//if (typeof T == 'person') {
+//}
+//const x = typeof T;
 var itemsCache = new ItemsCache(Person);
 var person1 = itemsCache.createItem("a");
 var person2 = itemsCache.createItem("b");
