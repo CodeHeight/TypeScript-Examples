@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var exportingModule_1 = require("./exportingModule");
+const exportingModule_1 = require("./exportingModule");
 //similar to namespace:
-var exportingModule = require("./exportingModule");
+const exportingModule = require("./exportingModule");
 require("./moduleWithSideEffects");
-var defaultExportingModule_1 = require("./defaultExportingModule");
-var reExportingModules_1 = require("./reExportingModules");
+const defaultExportingModule_1 = require("./defaultExportingModule");
+const reExportingModules_1 = require("./reExportingModules");
 console.log('Renameed: ', exportingModule_1.exportedVariable);
 defaultExportingModule_1.default();
 console.log('namespace:', exportingModule.exportedVariable);

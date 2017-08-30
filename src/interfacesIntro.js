@@ -1,12 +1,11 @@
-"use strict";
-var santa = {
+let santa = {
     numberOfKidsToVisit: 9988,
-    giveGift: function (callback) {
+    giveGift: (callback) => {
         callback(true);
     },
-    fly: function () { }
+    fly: () => { }
 };
-var numberOfKidsToVisit = santa.numberOfKidsToVisit;
+let numberOfKidsToVisit = santa.numberOfKidsToVisit;
 //if (santa.fly) {
 santa.fly();
 //}
@@ -14,7 +13,7 @@ santa.fly();
 function getNameAndAge2() {
     return { age: 37, name: 'Josh' };
 }
-var tuple2 = getNameAndAge2();
-var someName = tuple2.name;
-var FatSanta;
+let tuple2 = getNameAndAge2();
+let someName = tuple2.name;
+let FatSanta;
 //FatSanta.eat(); 

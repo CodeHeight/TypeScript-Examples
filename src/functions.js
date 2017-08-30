@@ -1,14 +1,13 @@
-"use strict";
 function getError(message, user) {
     return 'Error ' + message +
         ', requesting user: ' + user;
 }
 //console.log(getError('someError', 'someUser'));
-var errorToLog = getError('someError', 'someUser');
+let errorToLog = getError('someError', 'someUser');
 console.log(errorToLog);
-var getErrorFunc = getError; //returns a string
+let getErrorFunc = getError; //returns a string
 console.log(getErrorFunc('1', '2'));
-var getErrorFunction = getError;
+let getErrorFunction = getError;
 console.log(getErrorFunction('message1', 'user1'));
 function getErrorOptionalUser(message, user) {
     if (user) {
@@ -21,8 +20,7 @@ function getErrorOptionalUser(message, user) {
 }
 console.log(getErrorOptionalUser('err1'));
 console.log(getErrorOptionalUser('err1', 'user2'));
-function getErrorDefaultUser(message, user) {
-    if (user === void 0) { user = 'unknown'; }
+function getErrorDefaultUser(message, user = 'unknown') {
     if (user) {
         return 'Optional error ' + message +
             ' user: ' + user;
@@ -34,12 +32,8 @@ function getErrorDefaultUser(message, user) {
 console.log(getErrorDefaultUser('err1'));
 console.log(getErrorDefaultUser('err1', 'user2'));
 //function logErrors(...errors: string[]): void {
-function logErrors(error) {
-    var restErrors = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        restErrors[_i - 1] = arguments[_i];
-    }
-    var allErrors = [error].concat(restErrors);
+function logErrors(error, ...restErrors) {
+    let allErrors = [error, ...restErrors];
     console.log(allErrors.join('|'));
 }
 logErrors('error1');
@@ -67,8 +61,7 @@ logPoint({ x: 3, y: 4 });
 //    console.log(width * height);
 //}
 //another Object Constructor option:
-function showMessageToUser(_a) {
-    var width = _a.width, height = _a.height;
+function showMessageToUser({ width, height }) {
     console.log(width * height);
 }
 showMessageToUser({

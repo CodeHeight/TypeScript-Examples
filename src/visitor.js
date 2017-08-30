@@ -1,34 +1,30 @@
-"use strict";
-var RegularItem = (function () {
-    function RegularItem(price) {
+class RegularItem {
+    constructor(price) {
         this.price = price;
     }
-    RegularItem.prototype.accept = function (visitor) {
+    accept(visitor) {
         visitor.visitRegular(this);
-    };
-    return RegularItem;
-}());
-var GiftItem = (function () {
-    function GiftItem(minimalPriceForGift, originalPrice) {
+    }
+}
+class GiftItem {
+    constructor(minimalPriceForGift, originalPrice) {
         this.minimalPriceForGift = minimalPriceForGift;
         this.originalPrice = originalPrice;
     }
-    GiftItem.prototype.accept = function (visitor) {
+    accept(visitor) {
         visitor.visitGift(this);
-    };
-    return GiftItem;
-}());
-var DiscountItem = (function () {
-    function DiscountItem(originalPrice, discount) {
+    }
+}
+class DiscountItem {
+    constructor(originalPrice, discount) {
         this.originalPrice = originalPrice;
         this.discount = discount;
     }
-    DiscountItem.prototype.accept = function (visitor) {
+    accept(visitor) {
         visitor.visitDiscount(this);
-    };
-    return DiscountItem;
-}());
-var items = [
+    }
+}
+const items = [
     new RegularItem(10),
     new GiftItem(11, 3),
     new DiscountItem(4, 2)
@@ -36,8 +32,8 @@ var items = [
 console.log('price', calculateTotalPriceNaive(items)); //5
 console.log('discount', calculateDiscountNaive(items)); //12
 function calculateTotalPriceNaive(items) {
-    var price = 0;
-    items.forEach(function (item) {
+    let price = 0;
+    items.forEach(item => {
         if (item instanceof RegularItem) {
             price += item.price;
         }
@@ -48,9 +44,9 @@ function calculateTotalPriceNaive(items) {
     return price;
 }
 function calculateDiscountNaive(items) {
-    var price = calculateTotalPriceNaive(items);
-    var discount = 0;
-    items.forEach(function (item) {
+    const price = calculateTotalPriceNaive(items);
+    let discount = 0;
+    items.forEach(item => {
         if (item instanceof DiscountItem) {
             discount += item.discount;
         }
@@ -61,53 +57,49 @@ function calculateDiscountNaive(items) {
     });
     return discount;
 }
-var TotalPriceVisitor = (function () {
-    function TotalPriceVisitor() {
+class TotalPriceVisitor {
+    constructor() {
         this.price = 0;
     }
-    TotalPriceVisitor.prototype.calculate = function (items) {
-        var _this = this;
-        items.forEach(function (_) { return _.accept(_this); });
-    };
-    TotalPriceVisitor.prototype.visitRegular = function (item) {
+    calculate(items) {
+        items.forEach(_ => _.accept(this));
+    }
+    visitRegular(item) {
         this.price += item.price;
-    };
-    TotalPriceVisitor.prototype.visitGift = function (item) {
-    };
-    TotalPriceVisitor.prototype.visitDiscount = function (item) {
+    }
+    visitGift(item) {
+    }
+    visitDiscount(item) {
         this.price += item.originalPrice - item.discount;
-    };
-    return TotalPriceVisitor;
-}());
+    }
+}
 function calculateTotalPrice(items) {
-    var visitor = new TotalPriceVisitor();
+    const visitor = new TotalPriceVisitor();
     visitor.calculate(items);
     return visitor.price;
 }
-var DiscountVisitor = (function () {
-    function DiscountVisitor() {
+class DiscountVisitor {
+    constructor() {
         this.price = 0;
         this.discount = 0;
     }
-    DiscountVisitor.prototype.calculate = function (items) {
-        var _this = this;
+    calculate(items) {
         this.price = calculateTotalPrice(items);
-        items.forEach(function (_) { return _.accept(_this); });
-    };
-    DiscountVisitor.prototype.visitRegular = function (item) {
-    };
-    DiscountVisitor.prototype.visitGift = function (item) {
+        items.forEach(_ => _.accept(this));
+    }
+    visitRegular(item) {
+    }
+    visitGift(item) {
         if (this.price >= item.minimalPriceForGift) {
             this.discount += item.originalPrice;
         }
-    };
-    DiscountVisitor.prototype.visitDiscount = function (item) {
+    }
+    visitDiscount(item) {
         this.discount += item.discount;
-    };
-    return DiscountVisitor;
-}());
+    }
+}
 function calculateDiscount(items) {
-    var visitor = new DiscountVisitor();
+    const visitor = new DiscountVisitor();
     visitor.calculate(items);
     return visitor.discount;
 }
